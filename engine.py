@@ -10,9 +10,7 @@ def load_model():
     predictor,args = main(exp, args,"yolox_s.pth")
     return ocr,args,predictor
 
-
 ocr,args,predictor = load_model()
-
 
 def run(image_path):
     result = ocr.ocr(image_path, cls=True)
