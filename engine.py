@@ -29,28 +29,29 @@ def run(image_path):
             """ if once reach dob or gender or aadhar then there is no name so we don't need if any thing detected any string which look like name """
             if (not re.search(r'[0-9]+|male|:|india|government',string,flags=re.IGNORECASE))&(" " in string):
                 """ if any string contains digit or gender or ':'(father:name) or india or government  and also this string contains first name and last name """
-                value['name'] = string
+                value['name'] = [string]
         
         if (len(string.replace(" ",""))==12 ) & (all(char.isdigit() for char in string.replace(" ",""))):
             """ first remove space this stirng and string len should be 12 and all the string is digit """
-            value['aadhar'] = " ".join([string.replace(" ","")[i:i+4] for i in range(0,12,4)])
+            value['aadhar'] = [" ".join([string.replace(" ","")[i:i+4] for i in range(0,12,4)])]
 
         gender = re.search(r'female|male',string,flags=re.IGNORECASE)
         """ if any string female or male  extract that much string any search string
             there is also reason if first added female beacause if added male  first then search string every time detect male (fe'male') """
         if gender:
-            value['gender'] = gender.group().lower()
+            value['gender'] = [gender.group().lower()]
 
         dob = re.search(r"\d{2}/\d{2}/\d{2,4}|birth",string,flags=re.IGNORECASE)
         """ search string 00/00/0000 or 0000 or birth"""
         if dob:
             if all(char.isalpha() for char in dob.group()):
                 "if all the string digit and then added date of birth"
-                value['DOB'] = re.search(r"\d{2}/\d{2}/\d{2,4}|\d+",string).group()
+                value['DOB'] = [re.search(r"\d{2}/\d{2}/\d{2,4}|\d+",string).group()]
             else:
-                value['DOB'] = dob.group()
+                value['DOB'] = [dob.group()]
         
     print(value)
+    return value
 
 
 if __name__ == "__main__":
