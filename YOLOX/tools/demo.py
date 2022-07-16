@@ -97,7 +97,7 @@ def make_parser():
     parser.add_argument("-n", "--name", type=str, default="yolox-s", help="model name")
 
     parser.add_argument(
-        "--path", default="./20220705_174920.jpg", help="path to images or video"
+        "--path", default=None, help="path to images or video"
     )
     parser.add_argument("--camid", type=int, default=0, help="webcam demo camera id")
     parser.add_argument(
@@ -115,7 +115,7 @@ def make_parser():
         type=str,
         help="please input your experiment description file",
     )
-    parser.add_argument("-c", "--ckpt", default="yolox_s.pth", type=str, help="ckpt for eval")
+    parser.add_argument("-c", "--ckpt", default=None, type=str, help="ckpt for eval")
     parser.add_argument(
         "--device",
         default="cpu",
@@ -333,7 +333,7 @@ def imageflow_demo(predictor, vis_folder, current_time, args):
             break
 
 
-def main(exp, args):
+def main(exp, args,model_path):
     if not args.experiment_name:
         args.experiment_name = exp.exp_name
 
@@ -347,6 +347,8 @@ def main(exp, args):
 
     if args.trt:
         args.device = "gpu"
+    if not args.ckpt:
+        args.ckpt = model_path
 
     logger.info("Args: {}".format(args))
 
@@ -399,24 +401,30 @@ def main(exp, args):
         model, exp, COCO_CLASSES, trt_file, decoder,
         args.device, args.fp16, args.legacy,
     )
-    current_time = time.localtime()
 
+    return predictor,args
+
+def inference(predictor,args,img_path):
+    if not args.path:
+        args.path = img_path
+    current_time = time.localtime()
     vis_folder = "output"
     os.makedirs(vis_folder,exist_ok=True)
     if args.demo == "image":
         image_demo(predictor, vis_folder, args.path, current_time, args.save_result)
-    elif args.demo == "video" or args.demo == "webcam":
-        imageflow_demo(predictor, vis_folder, current_time, args)
+    # elif args.demo == "video" or args.demo == "webcam":
+    #     imageflow_demo(predictor, vis_folder, current_time, args)
 
 
 
 
 
-def j():
+def data():
     args = make_parser().parse_args()
     exp = get_exp(args.exp_file, args.name)
-    main(exp, args)
-
+    return args,exp
+    # predictor,args = main(exp, args,"yolox_s.pth")
+    # inference(predictor,args,"20220705_174920.jpg")
 
 if __name__ == "__main__":
     args = make_parser()
