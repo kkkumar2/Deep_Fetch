@@ -2,6 +2,7 @@ from engine import run
 from flask import Flask, request
 from werkzeug.utils import secure_filename
 import os
+from flask import jsonify
 
 
 app = Flask(__name__)
@@ -19,4 +20,8 @@ def detect():
     video.save(os.path.join(uploads_dir, secure_filename(video.filename)))
     IMAGE_PATH = os.path.join(uploads_dir, secure_filename(video.filename))
     out = run(IMAGE_PATH)
-    return out
+    return jsonify(out)
+
+if __name__ == '__main__':
+    port = 8080
+    app.run(host='0.0.0.0',port=port)

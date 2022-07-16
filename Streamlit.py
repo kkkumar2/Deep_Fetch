@@ -1,9 +1,21 @@
-from engine import run
 import streamlit as st
+# from engine import run
 import os
 import numpy as np
 from PIL import Image
 import pandas as pd
+import json
+
+
+def flask_call(path):
+    url = "http://127.0.0.1:8080/detect"
+    import requests
+
+    files = {'image': open(path, 'rb')}
+    out = requests.post(url, files=files)
+    print(out.content)
+    print(json.loads(out.content))
+    return json.loads(out.content)
 
 def save_uploaded_file(uploaded_file):
     try:
@@ -36,10 +48,11 @@ elif app_mode == "Upload image":
             image = np.array(Image.open(uploaded_file)) 
             st.image(image)
             # out = {"name":["mohankumar"],"DOB":["23/03/1997"]} ## used for testing purpose
-            out = run(path)
+            # out = run(path)
+            out = flask_call(path)
             df = pd.DataFrame(out)
             st.dataframe(df)
         else:
             print("File is not proper")
     
-    
+

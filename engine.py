@@ -25,6 +25,7 @@ def run(image_path):
 
     for line in result:
         string = line[1][0]
+        print(string)
         
         """ re.IGNORECASE or re.I is the lower all the letter"""
         if (not value['DOB']) & (not value['gender']) & (not value['aadhar']) :
@@ -43,12 +44,12 @@ def run(image_path):
         if gender:
             value['gender'] = [gender.group().lower()]
 
-        dob = re.search(r"\d{2}/\d{2}/\d{2,4}|birth",string,flags=re.IGNORECASE)
+        dob = re.search(r"\d{2}/\S\d/\d{2,4}|birth",string,flags=re.IGNORECASE)
         """ search string 00/00/0000 or 0000 or birth"""
         if dob:
             if all(char.isalpha() for char in dob.group()):
                 "if all the string digit and then added date of birth"
-                value['DOB'] = [re.search(r"\d{2}/\d{2}/\d{2,4}|\d+",string).group()]
+                value['DOB'] = [re.search(r"\d{2}/\S\d/\d{2,4}|\d+",string).group()]
             else:
                 value['DOB'] = [dob.group()]
         
