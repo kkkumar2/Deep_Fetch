@@ -2,7 +2,7 @@ from paddleocr import PaddleOCR
 from YOLOX.tools.demo import data,main,inference
 from paddleocr import PaddleOCR
 import re
-
+import os
 
 def load_model():
     ocr = PaddleOCR(use_angle_cls=True, lang='en') 
@@ -13,6 +13,9 @@ def load_model():
 ocr,args,predictor = load_model()
 
 def run(image_path):
+    for i in os.listdir("output"):
+        os.remove(os.path.join('output',i))
+
     result = ocr.ocr(image_path, cls=True)
     inference(predictor,args,image_path)
     value ={}
@@ -23,7 +26,7 @@ def run(image_path):
 
     for line in result:
         string = line[1][0]
-        
+
         """ re.IGNORECASE or re.I is the lower all the letter"""
         if (not value['DOB']) & (not value['gender']) & (not value['aadhar']) :
             """ if once reach dob or gender or aadhar then there is no name so we don't need if any thing detected any string which look like name """
@@ -46,8 +49,9 @@ def run(image_path):
         if dob:
             if all(char.isalpha() for char in dob.group()):
                 "if all the string digit and then added date of birth"
-                value['DOB'] = [re.search(r"\d{2}/\d{2}/\d{2,4}|\d+",string).group()]
+                value['DOB'] = [re.search(r"\d{2}/\S\d/\d{2,4}|\d+",string).group()]
             else:
+                
                 value['DOB'] = [dob.group()]
         
     print(value)

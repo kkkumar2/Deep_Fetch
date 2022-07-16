@@ -29,6 +29,8 @@ if app_mode =='About App':
 
 elif app_mode == "Upload image":
     # WINDOW = st.image([])  
+    for i in os.listdir('uploads'):
+        os.remove(os.path.join('uploads', i))
     uploaded_file = st.file_uploader(label="Upload an image", type=[ "jpg", "jpeg",'png'])
     if uploaded_file is not None:
         status,path = save_uploaded_file(uploaded_file)
@@ -37,8 +39,11 @@ elif app_mode == "Upload image":
             st.image(image)
             # out = {"name":["mohankumar"],"DOB":["23/03/1997"]} ## used for testing purpose
             out = run(path)
+            img = os.listdir("output")
             df = pd.DataFrame(out)
             st.dataframe(df)
+            if len(image):
+                st.image(Image.open(os.path.join('output',img[-1])),caption='Detect Image',width=100)
         else:
             print("File is not proper")
     
