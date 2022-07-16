@@ -1,10 +1,10 @@
 # TODO: Update with exact module version
-# numpy
-# torch>=1.7
-# opencv_python
-# loguru
-# tqdm
-# torchvision
+numpy
+torch>=1.7
+opencv_python
+loguru
+tqdm
+torchvision
 thop
 ninja
 tabulate
