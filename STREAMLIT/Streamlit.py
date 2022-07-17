@@ -8,7 +8,10 @@ import json
 
 
 def flask_call(path):
-    url = "http://web:8080/detect"
+    url = os.getenv("URL",None)
+    # url = "http://web:8080/detect"
+    if url is None:
+        raise "Service URL is not present"
     import requests
 
     files = {'image': open(path, 'rb')}
@@ -55,7 +58,7 @@ elif app_mode == "Upload image":
             df = pd.DataFrame(out)
             st.dataframe(df)
             # if len(image):
-            #     st.image(Image.open(os.path.join('output',img[-1])),caption='Detect Image',width=100)
+            #     st.image(Image.open(os.path.join('output',uploaded_file.name)),caption='Detect Image',width=100)
         else:
             print("File is not proper")
     
