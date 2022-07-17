@@ -10,7 +10,9 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN pip install cmake
-RUN pip install opencv-contrib-python
+# RUN pip install opencv-contrib-python
+# RUN apt-get install ffmpeg libsm6 libxext6  -y
+RUN apt-get install libgl1 -y
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt 
 
