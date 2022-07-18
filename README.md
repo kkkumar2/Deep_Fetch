@@ -2,7 +2,7 @@
 
 **Deep_Fetch** is an AI based detector which will fetch the PII entities and image from any Government ID's and use it further processing
 
-![Generic badge](https://img.shields.io/badge/AI-Advance-green.svg) ![Generic badge](https://img.shields.io/badge/Python-3.6|3.7-blue.svg) ![Generic badge](https://img.shields.io/badge/pip-v3-red.svg) ![Generic badge](https://img.shields.io/badge/paddleocr-python-latest.svg) ![Generic badge](https://img.shields.io/badge/flask-latest-green.svg) ![Generic badge](https://img.shields.io/badge/streamlite-latest-green.svg) ![Generic badge](https://img.shields.io/badge/opencv-python-latest.svg)![Generic badge](https://img.shields.io/badge/yolox-python-latest.svg)
+![Generic badge](https://img.shields.io/badge/AI-Advance-green.svg) ![Generic badge](https://img.shields.io/badge/Python-3.7|3.8-blue.svg) ![Generic badge](https://img.shields.io/badge/pip-v3-red.svg) ![Generic badge](https://img.shields.io/badge/paddleocr-python-latest.svg) ![Generic badge](https://img.shields.io/badge/flask-latest-green.svg) ![Generic badge](https://img.shields.io/badge/streamlite-latest-green.svg) ![Generic badge](https://img.shields.io/badge/opencv-python-latest.svg) ![Generic badge](https://img.shields.io/badge/yolox-python-latest.svg)
 
 
 <h2><img src="https://cdn2.iconfinder.com/data/icons/artificial-intelligence-6/64/ArtificialIntelligence9-512.png" alt="Brain+Machine" height="38" width="38"> Creators </h2>
@@ -13,7 +13,7 @@
 
 ### [Mohammed squaib](https://github.com/saquibquddus?tab=repositories)
 
-### Dilpa
+### [Dilpa Rao](https://github.com/Drao1977?tab=repositories)
 
 # About the project
 
