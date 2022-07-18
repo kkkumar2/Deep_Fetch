@@ -41,6 +41,7 @@ if app_mode =='About App':
 
 elif app_mode == "Upload image":
     # WINDOW = st.image([])  
+    os.makedirs("uploads")
     for i in os.listdir('uploads'):
         os.remove(os.path.join('uploads', i))
     uploaded_file = st.file_uploader(label="Upload an image", type=[ "jpg", "jpeg",'png'])
