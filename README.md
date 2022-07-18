@@ -11,7 +11,7 @@
 
 ### Sandeep Jena
 
-### Mohammed squaib
+### [Mohammed squaib](https://github.com/saquibquddus?tab=repositories)
 
 ### Dilpa
 

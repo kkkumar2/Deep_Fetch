@@ -2,7 +2,7 @@ version: '3'
 services:
 # used docker first uncommet stramlit links
   web: 
-    # build: ./
+    build: ./
     image: aadhar_flask
     ports:
       - "8080:8080"
@@ -13,7 +13,7 @@ services:
       - frontend
                                                 
   streamlit:
-    # build: STREAMLIT/
+    build: STREAMLIT/
     image: aadhar_streamlit
     depends_on:
       - web
