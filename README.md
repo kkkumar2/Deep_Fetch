@@ -32,6 +32,16 @@ Clone the repository using below command:
 ```bash
 git clone https://github.com/kkkumar2/Deep_Fetch.git
 ```
+Create env with anaconda with 
+```bash
+bash init_setup.sh
+```
+activate environment
+```bash
+conda activate deepfetch
+```
+***OR***
+
 create a conda or virtual env environment using below command:
 ```bash
 conda create -n [env_name] python=3.7 or
@@ -63,6 +73,8 @@ Open localhost:8501 and Upload the Image and make sure Flask application is up b
 ```
 
 To test the Application using Docker
+
+used docker compose go file `STREAMLIT\Streamlit.py` and uncommet line no `13`
 
 command to up the services
 ```bash

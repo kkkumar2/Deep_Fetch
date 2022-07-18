@@ -8,8 +8,10 @@ import json
 
 
 def flask_call(path):
-    url = os.getenv("URL",None)
-    # url = "http://web:8080/detect"
+    # url = os.getenv("URL",None)
+    url = "http://localhost:8080/detect" # it used for without docker
+    # url = "http://web:8080/detect" # if used docer  then uncomment this line the commet bellow line no 12
+
     if url is None:
         raise "Service URL is not present"
     import requests
