@@ -13,11 +13,12 @@ def load_model():
 ocr,args,predictor = load_model()
 
 def run(image_path):
-    for i in os.listdir("output"):
-        os.remove(os.path.join('output',i))
+    # os.makedirs("output",exist_ok=True)
+    # for i in os.listdir("output"):
+    #     os.remove(os.path.join('output',i))
 
     result = ocr.ocr(image_path, cls=True)
-    inference(predictor,args,image_path)
+    bbox = inference(predictor,args,image_path)
     value ={}
     value.setdefault('name',0) 
     value.setdefault("gender",0)
@@ -55,8 +56,9 @@ def run(image_path):
                 
                 value['DOB'] = [dob.group()]
         
-    print(value)
-    return value
+    # print(value)
+    # print(bbox)
+    return value,bbox
 
 
 if __name__ == "__main__":

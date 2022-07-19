@@ -19,8 +19,8 @@ def detect():
     video = request.files['image']
     video.save(os.path.join(uploads_dir, secure_filename(video.filename)))
     IMAGE_PATH = os.path.join(uploads_dir, secure_filename(video.filename))
-    out = run(IMAGE_PATH)
-    return jsonify(out)
+    out,bbox = run(IMAGE_PATH)
+    return jsonify([out,bbox])
 
 if __name__ == '__main__':
     port = 8080

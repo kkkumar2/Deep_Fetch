@@ -3,18 +3,18 @@ services:
 # used docker first uncommet stramlit links
   web: 
     build: ./
-    image: aadhar_flask
+    image: fl
     ports:
       - "8080:8080"
     # volumes:
     #   - $PWD/data:/var/lib/mysql
-    container_name: FASTAPIFACE
+    # container_name: FASTAPIFACE
     networks:
       - frontend
                                                 
   streamlit:
     build: STREAMLIT/
-    image: aadhar_streamlit
+    image: st
     depends_on:
       - web
     ports:

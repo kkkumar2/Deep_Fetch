@@ -266,7 +266,8 @@ class Predictor(object):
             y1 = int(box[3])
             crop = img[y0:y1,x0:x1]
             cv2.imwrite(save_file_name,crop)
-            break
+            return (x0,y0,x1,y1)
+            # break
 
         # vis_res = vis(img, bboxes, scores, cls, cls_conf, self.cls_names)
         # return vis_res
@@ -282,8 +283,9 @@ def image_demo(predictor, vis_folder, path, current_time, save_result):
         save_file_name = os.path.join(vis_folder, os.path.basename(image_name))
 
         outputs, img_info = predictor.inference(image_name)
-        predictor.visual(outputs[0], img_info, save_file_name, predictor.confthre)
+        bbox = predictor.visual(outputs[0], img_info, save_file_name, predictor.confthre)
         logger.info("Saving detection result in {}".format(save_file_name))
+        return bbox
         # result_image = predictor.visual(outputs[0], img_info,predictor.confthre)
         # if save_result:
         #     save_folder = os.path.join(
@@ -411,7 +413,7 @@ def inference(predictor,args,img_path):
     vis_folder = "output"
     os.makedirs(vis_folder,exist_ok=True)
     if args.demo == "image":
-        image_demo(predictor, vis_folder, args.path, current_time, args.save_result)
+        return image_demo(predictor, vis_folder, args.path, current_time, args.save_result)
     # elif args.demo == "video" or args.demo == "webcam":
     #     imageflow_demo(predictor, vis_folder, current_time, args)
 

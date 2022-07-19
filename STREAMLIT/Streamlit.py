@@ -46,7 +46,7 @@ if app_mode =='About App':
 
 elif app_mode == "Upload image":
     # WINDOW = st.image([])  
-    os.makedirs("uploads")
+    os.makedirs("uploads",exist_ok=True)
     for i in os.listdir('uploads'):
         os.remove(os.path.join('uploads', i))
     uploaded_file = st.file_uploader(label="Upload an image", type=[ "jpg", "jpeg",'png'])
@@ -57,11 +57,15 @@ elif app_mode == "Upload image":
             st.image(image)
             # out = {"name":["mohankumar"],"DOB":["23/03/1997"]} ## used for testing purpose
             # out = run(path)
-            out = flask_call(path)
-            df = pd.DataFrame(out)
+            out= flask_call(path)
+            
+            df = pd.DataFrame(out[0])
             st.dataframe(df)
-            # if len(image):
-            #     st.image(Image.open(os.path.join('output',uploaded_file.name)),caption='Detect Image',width=100)
+            # print(out[1][0])
+            bbox = out[1]
+            if len(bbox):
+                img = image[bbox[1]:bbox[3],bbox[0]:bbox[2]]
+                st.image(Image.fromarray(img),caption='Detect Image',width=100)
         else:
             print("File is not proper")
     
